@@ -1,0 +1,19 @@
+{
+  "name": "poller",
+  "module": "index.ts",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5",
+    "@repo/typescript-config": "workspace:*",
+    "@repo/kafka": "workspace:*",
+    "@repo/redis": "workspace:*"
+  },
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@types/ws": "^8.18.1",
+    "ws": "^8.20.0"
+  }
+}
