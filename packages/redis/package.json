@@ -15,6 +15,7 @@
     "redis": "^5.12.1"
   },
   "exports": {
-    "./index.ts": "./index.ts"
+    ".": "./index.ts",
+    "./pubsub": "./pubsub.ts"
   }
 }
