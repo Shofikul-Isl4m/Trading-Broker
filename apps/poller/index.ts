@@ -7,7 +7,7 @@ const producer = kafka.producer();
 async function start() {
     try {
         await createTopic("price-update", 2);
-        producer.connect();
+        await producer.connect();
         console.log("kafka ready");
         const ws = new WebSocket("wss://ws.backpack.exchange");
         ws.on('open', () => {
