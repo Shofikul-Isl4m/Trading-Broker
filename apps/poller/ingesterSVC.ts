@@ -21,7 +21,7 @@ function savePriceFromStr(value: string = "22.844564") {
     const result = Number.parseInt(combined, 10);
     if (!Number.isNaN(combined)) return result;
 }
-savePriceFromStr()
+
 try {
     let consumer = kafka.consumer({ groupId: 'my-group' });
     await publisher.connect()
