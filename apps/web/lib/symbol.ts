@@ -6,6 +6,4 @@ export function wsToAppSymbol(symbol: string): string {
     return symbol.replaceAll("_", "");
 
 
-
-
 }

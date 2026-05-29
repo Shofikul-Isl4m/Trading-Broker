@@ -4,4 +4,4 @@ import { authMiddlware } from "../middleware/authMiddleware";
 const balanceRouter: Router = Router();
 
 balanceRouter.use(authMiddlware);
-balanceRouter.get("/usd", getUsdBalanceController)
+balanceRouter.get("/usd", getUsdBalanceController);
