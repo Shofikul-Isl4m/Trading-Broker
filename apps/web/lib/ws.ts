@@ -1,8 +1,18 @@
+export type QutoPayLoad = Record<string, {
+    ask_price: number, bid_price: number, decimal: number
+}>;
+
+
+type QutoListner = (data: QutoPayLoad) => void
+
+
+
 class WsClient {
     private ws: WebSocket | null = null;
     private url = "ws://localhost:8080";
     private isConnecting = false;
-    private currentUserId
+    private currentUserId;
+    private listners = new Set<QutoListner>();
 
 
 
@@ -11,17 +21,15 @@ class WsClient {
             return;
         }
         this.open()
+        // https://blog.logrocket.com/exploring-usesyncexternalstore-react-hook/
 
 
 
     }
 
-
-
-
     identity(userId) {
         this.currentUserId = userId;
-        sendIdentity()
+        this.sendIdentity()
     }
 
     sendIdentity() {
@@ -38,14 +46,44 @@ class WsClient {
 
         this.ws.onopen = () => {
             this.isConnecting = false;
-            this.sendIdentity
+            this.sendIdentity();
+
+        }
+        this.ws.onmessage = (evt) => {
+            try {
+                const data = JSON.parse(evt.data);
+                this.listners.forEach(listner =>
+                    listner(data as QutoPayLoad));
+            } catch (error) {
+
+            }
+
+
+        }
+
+        this.ws.onclose = () => {
+
+            this.isConnecting = false;
+            setTimeout(() => {
+
+            },)
 
 
 
         }
 
 
+
+
+    }
+
+    subscribe(listner) {
+        this.listners.add(listner);
+        return (() => {
+            this.listners.delete(listner);
+        })
     }
 }
 
 
+export const wsClient = new WsClient();

@@ -1,5 +1,5 @@
 {
-  "name": "@repo/redis",
+  "name": "@repo/types",
   "module": "index.ts",
   "type": "module",
   "private": true,
@@ -11,12 +11,10 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@types/redis": "^4.0.11",
-    "redis": "^5.12.1"
+    "zod": "^4.4.3"
   },
   "exports": {
-    ".": "./index.ts",
-    "./pubsub": "./pubsub.ts",
-    "./queue": "./queue.ts"
+    "./types": "./src/index.ts",
+    "./zodSchema": "./src/zodSchema.ts"
   }
 }

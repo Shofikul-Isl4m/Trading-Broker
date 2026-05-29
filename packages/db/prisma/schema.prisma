@@ -13,8 +13,33 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String
+  id             String           @id @default(uuid())
+  email          String           @unique
+  balance        Int
+  decimal        Int              @default(4)
+  lastLoggedInt  DateTime?
+  ExistingTrades ExistingTrades[]
 }
 
+model ExistingTrades {
+  id         String    @id @default(uuid())
+  openPrice  Int
+  leverage   Int
+  asset      String
+  margin     Int
+  quantity   Float
+  type       OrderType
+  closePrice Int
+  pnl        Int
+  decimal    Int
+  liquidated Boolean
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  createdAt  DateTime  @default(now())
+}
+
+enum OrderType {
+  short
+  long
+}
 
