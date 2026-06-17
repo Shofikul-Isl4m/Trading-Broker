@@ -7,9 +7,13 @@
     "@types/bun": "latest",
     "@repo/typescript-config": "workspace:*",
     "@repo/redis": "workspace:*",
-    "@repo/types": "workspace:*"
+    "@repo/types": "workspace:*",
+    "@repo/db": "workspace:*"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "mongodb": "^7.2.0"
   }
 }

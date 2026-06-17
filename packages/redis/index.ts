@@ -7,6 +7,6 @@ const client: RedisClientType = createClient({
 
 client.on("error", err => console.log("redis client error", err));
 
-
+export type TypeOfRedisClient = RedisClientType;
 export default client;
 

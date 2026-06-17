@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { emailGenController } from "../controllers/userController";
+import { emailGenController, signInController } from "../controllers/userController";
 
 
 
-const userRouter = Router();
+export const userRouter: Router = Router();
 
 userRouter.route("/signup").post(emailGenController);
 userRouter.route("/signin/post").get(signInController)

@@ -1,5 +1,6 @@
 import { httpPusher } from "@repo/redis/queue";
 import { Request, Response } from "express";
+import { responseLoopObj } from "../utils/responseLoop";
 
 export const getUsdBalanceController = async (req: Request, res: Response) => {
     const userId = (req as unknown as { userId: string }).userId;
@@ -27,3 +28,25 @@ export const getUsdBalanceController = async (req: Request, res: Response) => {
         });
     }
 };
+
+export const getAssetBalanceController = async (req: Request, res: Response) => {
+    const userId = (req as unknown as { userId: string }).userId;
+    const reqId = Date.now().toString() + crypto.randomUUID();
+
+    try {
+        await httpPusher.xAdd("stream:app:info", "*", {
+            type: "get-asset-bal",
+            reqId,
+            userId
+        })
+
+        const data = await responseLoopObj.waitForResponse(reqId);
+        console.log(data);
+        res.json({
+            message: "fetched asset balance successfully",
+            data
+        })
+    } catch (error) {
+
+    }
+}
